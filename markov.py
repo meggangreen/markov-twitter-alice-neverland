@@ -77,14 +77,21 @@ def make_text(chains, n):
     return " ".join(words)
 
 
-def tweet(chains):
+def tweet(random_text):
     """Create a tweet and send it to the Internet."""
 
     # Use Python os.environ to get at environmental variables
     # Note: you must run `source secrets.sh` before running this file
     # to make sure these environmental variables are set.
+    api = twitter.Api(
+        consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
+        consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
+        access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
+        access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
+    print api.VerifyCredentials()
+    status = api.PostUpdate(random_text)
+    print status.text
 
-    pass
 
 
 # Get the filenames from the user through a command line prompt, ex:
@@ -107,7 +114,7 @@ chains = make_chains(input_text1, input_text2, n)
 
 # Produce random text
 random_text = make_text(chains, n)
-print random_text
 
 # Your task is to write a new function tweet, that will take chains as input
-# tweet(chains)
+# tweet (random_text)
+tweet(random_text)
