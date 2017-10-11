@@ -88,7 +88,7 @@ def tweet(random_text):
         consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
         access_token_key=os.environ['TWITTER_ACCESS_TOKEN_KEY'],
         access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'])
-    print api.VerifyCredentials()
+    # print api.VerifyCredentials()
     status = api.PostUpdate(random_text)
     print status.text
 
@@ -108,13 +108,23 @@ def tweet(random_text):
 input_text1 = open_and_read_file("alice.txt")
 input_text2 = open_and_read_file("neverland.txt")
 n = 2
+def want_to_tweet_again():
 
-# Get a Markov chain
-chains = make_chains(input_text1, input_text2, n)
+    while True:
+        user_input = raw_input("Enter to tweet [q to quit] > ")
+        if user_input == 'q':
+            break
 
-# Produce random text
-random_text = make_text(chains, n)
+        # Get a Markov chain
+        chains = make_chains(input_text1, input_text2, n)
 
-# Your task is to write a new function tweet, that will take chains as input
-# tweet (random_text)
-tweet(random_text)
+        # Produce random text
+        random_text = make_text(chains, n)
+
+        # Your task is to write a new function tweet, that will take chains as input
+        # tweet (random_text)
+
+
+        tweet(random_text)
+
+want_to_tweet_again()
