@@ -8,18 +8,17 @@ import twitter
 
 
 def open_and_read_file(file_path):
-    """Take file path as string; return text as string.
+    """ Take file path as string; return text as string.
 
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
 
-    # your code goes here
     filename = open(file_path)
     file_lines = filename.readlines()
     filename.close()
-    # import pdb; pdb.set_trace()
 
+    # Choose 300 lines from extremely long text
     start_line = file_lines.index(choice(file_lines[:-300]))
     end_line = start_line + 300
     selected_lines = file_lines[start_line:end_line]
@@ -29,9 +28,7 @@ def open_and_read_file(file_path):
 
 
 def make_chains(text_string1, text_string2, n):
-    """Take input text as string; return dictionary of Markov chains.
-
-    """
+    """ Take input text as string; return dictionary of Markov chains. """
 
     chains = {}
 
@@ -93,21 +90,11 @@ def tweet(random_text):
     print status.text
 
 
-
-# Get the filenames from the user through a command line prompt, ex:
-# python markov.py green-eggs.txt shakespeare.txt
-# filenames = sys.argv[1:]
-
-# # Open the files and turn them into one long string
-# text = open_and_read_file(filenames)
-
-# # Get a Markov chain
-# chains = make_chains(text)
-
 # Get file text -- one at a time, static files, dynamic text
 input_text1 = open_and_read_file("alice.txt")
 input_text2 = open_and_read_file("neverland.txt")
 n = 2
+
 def want_to_tweet_again():
 
     while True:
@@ -121,10 +108,7 @@ def want_to_tweet_again():
         # Produce random text
         random_text = make_text(chains, n)
 
-        # Your task is to write a new function tweet, that will take chains as input
-        # tweet (random_text)
-
-
+        # Tweet random text
         tweet(random_text)
 
 want_to_tweet_again()
